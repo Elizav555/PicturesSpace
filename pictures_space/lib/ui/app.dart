@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pictures_space/ui/pages/auth_page.dart';
+import 'package:pictures_space/ui/auth/auth_page.dart';
 
 import '../resourses/strings.dart';
 import 'navigation/routes.dart';
