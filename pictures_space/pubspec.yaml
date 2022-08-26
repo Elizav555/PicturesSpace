@@ -48,7 +48,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+  flutter_bloc: ^8.0.1
+  get_it: ^7.2.0
+  google_sign_in: ^5.4.1
+  fluro: ^2.0.3
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
