@@ -8,4 +8,12 @@ class Strings {
   static const String newPost = 'New Post';
 
   static const String error = 'Error';
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String signInGoogle = 'Sign in with Google';
+
+  static const String authSuccessBtn = 'Go to my feed';
+  static const String emailError = 'Enter a valid email address';
+  static const String passwordError =
+      'Enter a valid password. It must contains at least one number and one capital latin letter and have minimum length 10';
 }

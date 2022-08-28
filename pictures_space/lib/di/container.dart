@@ -8,6 +8,7 @@ import 'package:pictures_space/data/auth_manager.dart';
 import 'package:pictures_space/domain/auth_manager.dart';
 import 'package:pictures_space/resourses/strings.dart';
 
+import '../ui/auth/auth_bloc.dart';
 import '../ui/auth/auth_page.dart';
 
 Future<void> setup() async {
@@ -31,9 +32,10 @@ Future<void> setup() async {
       getIt.get<GoogleSignIn>(),
       getIt.get<GoogleAuthProvider>()));
 
-  //Pages
+  //AuthPage
+  getIt.registerFactory<AuthBloc>(() => AuthBloc(GetIt.I.get<AuthManager>()));
   getIt.registerFactory<AuthPage>(() => AuthPage(
       title: Strings.login,
-      authManager: getIt.get<AuthManager>(),
+      authBloc: getIt.get<AuthBloc>(),
       router: getIt.get<FluroRouter>()));
 }
