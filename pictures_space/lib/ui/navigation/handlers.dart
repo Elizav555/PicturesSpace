@@ -1,18 +1,14 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pictures_space/ui/auth/auth_page.dart';
 import 'package:pictures_space/ui/mock/mock_page.dart';
 
 import '../../resourses/strings.dart';
 
-var rootHandler = Handler(
-    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  return const MockPage(title: 'root');
-});
-
 var authRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  return const AuthPage(title: Strings.login);
+      return GetIt.I.get<AuthPage>();
 });
 
 var authRegistrationHandler = Handler(

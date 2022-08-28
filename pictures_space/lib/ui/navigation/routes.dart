@@ -6,11 +6,10 @@ import '../../resourses/strings.dart';
 import 'handlers.dart';
 
 class Routes {
-  static String root = "/";
-  static String auth = "/auth";
-  static String registration = "/auth/registration";
+  static String auth = "auth";
+  static String registration = "auth/registration";
   static String profile = "/profile";
-  static String feed = "/feed";
+  static String feed = "feed";
   static String post = "/feed/post";
   static String newPost = "/newpost";
 
@@ -22,7 +21,6 @@ class Routes {
       }
       return;
     });
-    router.define(root, handler: rootHandler);
     router.define(auth, handler: authRouteHandler);
     router.define(registration,
         handler: authRegistrationHandler,

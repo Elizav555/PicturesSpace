@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pictures_space/ui/auth/auth_page.dart';
+import 'package:pictures_space/domain/auth_manager.dart';
 
 import '../resourses/strings.dart';
 import 'navigation/routes.dart';
@@ -19,9 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthPage(title: Strings.picturesSpace),
-      initialRoute: Routes.auth,
-      //isLoggedIn()?Routes.feed:Routes.auth,
+      initialRoute:
+          GetIt.I.get<AuthManager>().isLoggedIn ? Routes.feed : Routes.auth,
       onGenerateRoute: router.generator,
     );
   }

@@ -1,9 +1,18 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:pictures_space/domain/auth_manager.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({Key? key, required this.title}) : super(key: key);
+  const AuthPage(
+      {Key? key,
+      required this.title,
+      required this.authManager,
+      required this.router})
+      : super(key: key);
 
   final String title;
+  final AuthManager authManager;
+  final FluroRouter router;
 
   @override
   State<AuthPage> createState() => _AuthPageState();
