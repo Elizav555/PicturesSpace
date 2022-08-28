@@ -8,7 +8,7 @@ import '../../resourses/strings.dart';
 
 var authRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-      return GetIt.I.get<AuthPage>();
+  return GetIt.I.get<AuthPage>();
 });
 
 var authRegistrationHandler = Handler(
