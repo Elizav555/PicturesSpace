@@ -2,9 +2,11 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pictures_space/ui/auth/auth_page.dart';
+import 'package:pictures_space/ui/feed/feed_page_args.dart';
 import 'package:pictures_space/ui/mock/mock_page.dart';
 
 import '../../resourses/strings.dart';
+import '../feed/feed_page.dart';
 
 var authRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -42,18 +44,13 @@ var authRegistrationHandler = Handler(
 
 var profileRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  //TODO show how to handle params
-  // String? message = params["message"]?.first;
-  // String? colorHex = params["color_hex"]?.first;
-  // String? result = params["result"]?.first;
-  // return DemoSimpleComponent(
-  //     message: message ?? 'Testing', color: color, result: result);
   return const MockPage(title: Strings.profile);
 });
 
 var feedRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  return const MockPage(title: Strings.feed);
+  final feedArgs = context?.settings?.arguments as FeedPageArgs;
+  return FeedPage(title: Strings.feed, credential: feedArgs.userCredential);
 });
 
 var postRouteHandler = Handler(

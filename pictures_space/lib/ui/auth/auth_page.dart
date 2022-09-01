@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pictures_space/resourses/strings.dart';
+import 'package:pictures_space/ui/feed/feed_page_args.dart';
 import 'package:pictures_space/ui/widgets/edit_text.dart';
 
 import '../navigation/routes.dart';
@@ -67,25 +68,23 @@ class AuthPageState extends State<AuthPage> {
                 if (state is LoadingState) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is SuccessState) {
-                  return Center(
-                      child: ElevatedButton(
-                          onPressed: () => widget.router.navigateTo(
-                                context,
-                                Routes.feed,
-                                clearStack: true,
-                                /*TODO pass userId
-                                var usersHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-                                  return UsersScreen(params["id"][0]);
-                                    });
-                                  void defineRoutes(FluroRouter router) {
-                                    router.define("/users/:id", handler: usersHandler);
-                                   */
-                              ),
-                          child: const Text(Strings.authSuccessBtn)));
+                  Future.microtask(() => widget.router.navigateTo(
+                        context,
+                        Routes.feed,
+                        clearStack: true,
+                        replace: true,
+                        routeSettings: RouteSettings(
+                          arguments: FeedPageArgs(state.userCredential),
+                        ),
+                      ));
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is LoadedState) {
                   return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        const SizedBox(
+                          height: 32,
+                        ),
                         Image.asset('assets/images/login_image.png'),
                         const Text(Strings.picturesSpace),
                         EditText(
@@ -102,17 +101,27 @@ class AuthPageState extends State<AuthPage> {
                           obscureText: true,
                         ),
                         ElevatedButton(
-                            onPressed: () => context.read<AuthBloc>().add(
-                                SignInEvent(_emailController.text,
-                                    _passwordController.text)),
+                            onPressed: () {
+                              if (validateEmail(_emailController.text) ==
+                                      null &&
+                                  validatePassword(_passwordController.text) ==
+                                      null) {
+                                context.read<AuthBloc>().add(SignInEvent(
+                                    _emailController.text,
+                                    _passwordController.text));
+                              }
+                            },
                             child: const Text(Strings.login)),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: ElevatedButton(
-                              onPressed: () => context
-                                  .read<AuthBloc>()
-                                  .add(GoogleSignInEvent()),
-                              child: const Text(Strings.signInGoogle)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: ElevatedButton(
+                                onPressed: () => context
+                                    .read<AuthBloc>()
+                                    .add(GoogleSignInEvent()),
+                                child: const Text(Strings.signInGoogle)),
+                          ),
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
@@ -122,6 +131,12 @@ class AuthPageState extends State<AuthPage> {
                               child: const Text(Strings.registration)),
                         )
                       ]);
+                } else if (state is RegistrationState) {
+                  Future.microtask(() => widget.router.navigateTo(
+                        context,
+                        Routes.registration,
+                      ));
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   return const Center(child: Text(Strings.error));
                 }

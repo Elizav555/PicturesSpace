@@ -14,6 +14,8 @@ abstract class AuthManager {
 
   Future<UserCredential?> register(String email, String password);
 
+  Future<void> signOut();
+
   bool get isLoggedIn;
 
   AuthManager(this.firebaseAuth, this.googleSignIn, this.googleAuthProvider);

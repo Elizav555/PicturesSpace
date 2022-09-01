@@ -95,4 +95,7 @@ class AuthManagerImpl extends AuthManager {
     }
     return null;
   }
+
+  @override
+  Future<void> signOut() => firebaseAuth.signOut();
 }
