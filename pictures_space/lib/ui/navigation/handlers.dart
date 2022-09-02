@@ -2,7 +2,6 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pictures_space/ui/auth/auth_page.dart';
-import 'package:pictures_space/ui/feed/feed_page_args.dart';
 import 'package:pictures_space/ui/mock/mock_page.dart';
 
 import '../../resourses/strings.dart';
@@ -49,8 +48,7 @@ var profileRouteHandler = Handler(
 
 var feedRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  final feedArgs = context?.settings?.arguments as FeedPageArgs;
-  return FeedPage(title: Strings.feed, credential: feedArgs.userCredential);
+  return const FeedPage(title: Strings.feed);
 });
 
 var postRouteHandler = Handler(

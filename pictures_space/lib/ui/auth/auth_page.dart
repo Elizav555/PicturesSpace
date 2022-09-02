@@ -2,7 +2,6 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pictures_space/resourses/strings.dart';
-import 'package:pictures_space/ui/feed/feed_page_args.dart';
 import 'package:pictures_space/ui/widgets/edit_text.dart';
 
 import '../navigation/routes.dart';
@@ -73,9 +72,6 @@ class AuthPageState extends State<AuthPage> {
                         Routes.feed,
                         clearStack: true,
                         replace: true,
-                        routeSettings: RouteSettings(
-                          arguments: FeedPageArgs(state.userCredential),
-                        ),
                       ));
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is LoadedState) {
