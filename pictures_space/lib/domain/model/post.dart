@@ -1,6 +1,6 @@
 class Post {
   String? id;
-  final String time;
+  final DateTime time;
   final String desc;
   final String imageUrl;
   final List<String> usersLiked;
