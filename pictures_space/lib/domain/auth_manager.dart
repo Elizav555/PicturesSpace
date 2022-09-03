@@ -8,6 +8,8 @@ abstract class AuthManager {
 
   Stream<User?> getUserStream();
 
+  User? getCurrentUser();
+
   Future<UserCredential?> signInGoogle();
 
   Future<UserCredential?> signInEmail(String email, String password);

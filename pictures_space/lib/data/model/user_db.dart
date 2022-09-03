@@ -1,4 +1,5 @@
 class UserDb {
+  final String? id;
   final String name;
   final String email;
   final List<String> postsIds;
@@ -7,7 +8,11 @@ class UserDb {
   static const _kemail = 'email';
   static const _kpostsIds = 'postsIds';
 
-  UserDb({required this.name, required this.email, this.postsIds = const []});
+  UserDb(
+      {required this.name,
+      required this.email,
+      this.postsIds = const [],
+      this.id});
 
   factory UserDb.fromJSON(Map<String, dynamic> json) => UserDb(
       name: json[_kname]! as String,

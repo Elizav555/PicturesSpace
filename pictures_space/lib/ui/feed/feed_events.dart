@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../domain/model/post.dart';
 
 abstract class FeedEvent {}
 
 class HasDataEvent extends FeedEvent {
-  final User? user;
+  final List<Post> posts;
 
-  HasDataEvent(this.user);
+  HasDataEvent(this.posts);
 }
 
 class GoToPostEvent extends FeedEvent {}

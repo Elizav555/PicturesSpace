@@ -98,4 +98,7 @@ class AuthManagerImpl extends AuthManager {
 
   @override
   Future<void> signOut() => firebaseAuth.signOut();
+
+  @override
+  User? getCurrentUser() => firebaseAuth.currentUser;
 }

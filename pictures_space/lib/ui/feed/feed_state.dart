@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../domain/model/post.dart';
 
 abstract class FeedState {}
 
 class LoadingState extends FeedState {}
 
 class LoadedState extends FeedState {
-  final User? user;
+  final List<Post> posts;
 
-  LoadedState(this.user);
+  LoadedState(this.posts);
 }

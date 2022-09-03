@@ -31,6 +31,7 @@ class UsersDbImpl extends UsersDb {
   Stream<List<UserDb>> getAllUsersStream() {
     return _usersRef.snapshots().map((event) => event.docs
         .map((e) => UserDb(
+            id: e.id,
             name: e.data().name,
             email: e.data().email,
             postsIds: e.data().postsIds))

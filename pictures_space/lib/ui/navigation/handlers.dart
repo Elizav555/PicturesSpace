@@ -48,7 +48,7 @@ var profileRouteHandler = Handler(
 
 var feedRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  return const FeedPage(title: Strings.feed);
+  return GetIt.I.get<FeedPage>();
 });
 
 var postRouteHandler = Handler(
