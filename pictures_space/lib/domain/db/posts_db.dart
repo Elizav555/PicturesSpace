@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'model/post.dart';
+import '../model/post.dart';
 
-abstract class PostsDb {
+abstract class PostsDatabase {
   Stream<List<Post>> getAllPostsStream(String userId);
 
   Future<List<Post>> getAllPosts(String userId);
@@ -18,5 +18,5 @@ abstract class PostsDb {
 
   final FirebaseFirestore firestore;
 
-  PostsDb(this.firestore);
+  PostsDatabase(this.firestore);
 }

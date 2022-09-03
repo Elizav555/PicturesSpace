@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pictures_space/data/mappers/posts_mapper.dart';
 import 'package:pictures_space/data/model/post_db.dart';
+import 'package:pictures_space/domain/db/posts_db.dart';
 import 'package:pictures_space/domain/model/post.dart';
-import 'package:pictures_space/domain/posts_db.dart';
 
-class PostsDbImpl extends PostsDb {
+class PostsDbImpl extends PostsDatabase {
   PostsDbImpl(super.firestore);
 
   static const _kpostsCollection = 'posts';
@@ -67,7 +67,7 @@ class PostsDbImpl extends PostsDb {
   }
 
   @override
-  Future<List<Post>> getAllPosts(String userId) {
+  Future<List<Post>> getAllPosts(String userId) async {
     final postsRef = _usersCollection
         .doc(userId)
         .collection(_kpostsCollection)
@@ -75,9 +75,10 @@ class PostsDbImpl extends PostsDb {
             //TODO ask can i remove this
             fromFirestore: (snapshot, _) => PostDb.fromJSON(snapshot.data()!),
             toFirestore: (item, _) => item.toJSON());
-    return postsRef.get().then((value) => value.docs
+    final posts = await postsRef.get().then((value) => value.docs
         .map((snapshot) =>
             PostsMapper.mapPostFromDb(snapshot.id, snapshot.data()))
         .toList());
+    return posts;
   }
 }

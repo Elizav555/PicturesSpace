@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../data/model/user_db.dart';
-import 'model/app_user.dart';
+import '../../data/model/user_db.dart';
+import '../model/app_user.dart';
 
-abstract class UsersDb {
+abstract class UsersDatabase {
   Stream<List<UserDb>> getAllUsersStream();
 
   Future<UserDb?> getUser(String id);
@@ -16,5 +16,5 @@ abstract class UsersDb {
 
   final FirebaseFirestore firestore;
 
-  UsersDb(this.firestore);
+  UsersDatabase(this.firestore);
 }

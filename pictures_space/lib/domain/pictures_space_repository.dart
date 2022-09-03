@@ -1,15 +1,13 @@
-import 'dart:io';
-
+import 'package:pictures_space/domain/db/posts_db.dart';
+import 'package:pictures_space/domain/db/users_db.dart';
 import 'package:pictures_space/domain/pictures_storage.dart';
-import 'package:pictures_space/domain/posts_db.dart';
-import 'package:pictures_space/domain/users_db.dart';
 
 import 'model/app_user.dart';
 import 'model/post.dart';
 
 abstract class PicturesSpaceRep {
-  final UsersDb usersDatabase;
-  final PostsDb postsDatabase;
+  final UsersDatabase usersDatabase;
+  final PostsDatabase postsDatabase;
   final PicturesStorage storage;
 
   PicturesSpaceRep(this.usersDatabase, this.postsDatabase, this.storage);
@@ -26,6 +24,8 @@ abstract class PicturesSpaceRep {
 
   Stream<List<Post>> getAllPostsStream(String userId);
 
+  Future<List<Post>> getAllPosts(String userId);
+
   Future<String> addPost(String userId, Post newPost);
 
   Future<void> updatePost(
@@ -35,7 +35,7 @@ abstract class PicturesSpaceRep {
 
   Future<void> deletePost(String userId, String id);
 
-  Future<String?> addImage(File newPicture, String name);
+  Future<String?> addImage(String path, String name);
 
   Future<void> deleteImage(String url);
 }

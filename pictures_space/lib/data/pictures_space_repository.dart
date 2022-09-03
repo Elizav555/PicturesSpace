@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:pictures_space/data/mappers/users_mapper.dart';
 import 'package:pictures_space/domain/model/app_user.dart';
 import 'package:pictures_space/domain/model/post.dart';
@@ -86,12 +84,17 @@ class PicturesSpaceRepImpl extends PicturesSpaceRep {
   }
 
   @override
-  Future<String?> addImage(File newPicture, String name) {
-    return storage.addImage(newPicture, name);
+  Future<String?> addImage(String path, String name) {
+    return storage.addImage(path, name);
   }
 
   @override
   Future<void> deleteImage(String url) {
     return storage.deleteImage(url);
+  }
+
+  @override
+  Future<List<Post>> getAllPosts(String userId) {
+    return postsDatabase.getAllPosts(userId);
   }
 }

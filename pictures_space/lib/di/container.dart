@@ -5,17 +5,17 @@ import 'package:fluro/fluro.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pictures_space/data/auth_manager.dart';
+import 'package:pictures_space/data/db/users_db.dart';
 import 'package:pictures_space/data/pictures_space_repository.dart';
 import 'package:pictures_space/data/pictures_storage.dart';
-import 'package:pictures_space/data/users_db.dart';
 import 'package:pictures_space/domain/auth_manager.dart';
+import 'package:pictures_space/domain/db/users_db.dart';
 import 'package:pictures_space/domain/pictures_space_repository.dart';
 import 'package:pictures_space/domain/pictures_storage.dart';
-import 'package:pictures_space/domain/users_db.dart';
 import 'package:pictures_space/resourses/strings.dart';
 
-import '../data/posts_db.dart';
-import '../domain/posts_db.dart';
+import '../data/db/posts_db.dart';
+import '../domain/db/posts_db.dart';
 import '../ui/auth/auth_bloc.dart';
 import '../ui/auth/auth_page.dart';
 import '../ui/feed/feed_bloc.dart';
@@ -37,9 +37,9 @@ Future<void> setup() async {
   getIt.registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
   //Db
-  getIt.registerLazySingleton<UsersDb>(
+  getIt.registerLazySingleton<UsersDatabase>(
       () => UsersDbImpl(getIt.get<FirebaseFirestore>()));
-  getIt.registerLazySingleton<PostsDb>(
+  getIt.registerLazySingleton<PostsDatabase>(
       () => PostsDbImpl(getIt.get<FirebaseFirestore>()));
 
   //Storage
@@ -48,8 +48,8 @@ Future<void> setup() async {
 
   //Rep
   getIt.registerLazySingleton<PicturesSpaceRep>(() => PicturesSpaceRepImpl(
-      getIt.get<UsersDb>(),
-      getIt.get<PostsDb>(),
+      getIt.get<UsersDatabase>(),
+      getIt.get<PostsDatabase>(),
       getIt.get<PicturesStorage>()));
 
   //Auth

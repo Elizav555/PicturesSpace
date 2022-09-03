@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pictures_space/domain/model/app_user.dart';
 
-import '../domain/users_db.dart';
-import 'mappers/users_mapper.dart';
-import 'model/user_db.dart';
+import '../../domain/db/users_db.dart';
+import '../mappers/users_mapper.dart';
+import '../model/user_db.dart';
 
-class UsersDbImpl extends UsersDb {
+class UsersDbImpl extends UsersDatabase {
   UsersDbImpl(super.firestore);
 
   static const _kusersCollection = 'clients';
