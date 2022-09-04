@@ -12,6 +12,10 @@ class SuccessState extends AuthState {
   SuccessState(this.userCredential);
 }
 
-class ErrorState extends AuthState {}
+class ErrorState extends AuthState {
+  final String errorMessage;
+
+  ErrorState(this.errorMessage);
+}
 
 class RegistrationState extends AuthState {}

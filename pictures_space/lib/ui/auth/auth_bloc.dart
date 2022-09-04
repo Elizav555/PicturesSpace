@@ -18,14 +18,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> signIn(SignInEvent event, Emitter<AuthState> emit) async {
     emit(LoadingState());
     final cred = await _authManager.signInEmail(event.email, event.password);
-    cred != null ? emit(SuccessState(cred)) : emit(ErrorState());
+    cred != null ? emit(SuccessState(cred)) : emit(ErrorState(''));
   }
 
   Future<void> googleSignIn(
       GoogleSignInEvent event, Emitter<AuthState> emit) async {
     emit(LoadingState());
     final cred = await _authManager.signInGoogle();
-    cred != null ? emit(SuccessState(cred)) : emit(ErrorState());
+    cred != null ? emit(SuccessState(cred)) : emit(ErrorState(''));
   }
 
   Future<void> register(RegisterEvent event, Emitter<AuthState> emit) async {

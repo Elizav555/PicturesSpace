@@ -13,9 +13,11 @@ import 'package:pictures_space/domain/db/users_db.dart';
 import 'package:pictures_space/domain/pictures_space_repository.dart';
 import 'package:pictures_space/domain/pictures_storage.dart';
 import 'package:pictures_space/resourses/strings.dart';
+import 'package:pictures_space/ui/app/app.dart';
 
 import '../data/db/posts_db.dart';
 import '../domain/db/posts_db.dart';
+import '../ui/app/state/app_block.dart';
 import '../ui/auth/auth_bloc.dart';
 import '../ui/auth/auth_page.dart';
 import '../ui/feed/feed_bloc.dart';
@@ -58,12 +60,17 @@ Future<void> setup() async {
       getIt.get<GoogleSignIn>(),
       getIt.get<GoogleAuthProvider>()));
 
+  //App
+  getIt.registerFactory<AppBloc>(() => AppBloc(getIt.get<FluroRouter>(),
+      GetIt.I.get<AuthManager>(), getIt.get<PicturesSpaceRep>()));
+  getIt.registerFactory<MyApp>(() => MyApp(appBloc: getIt.get<AppBloc>()));
+
   //AuthPage
   getIt.registerFactory<AuthBloc>(() => AuthBloc(GetIt.I.get<AuthManager>()));
   getIt.registerFactory<AuthPage>(() => AuthPage(
-      title: Strings.login,
-      authBloc: getIt.get<AuthBloc>(),
-      router: getIt.get<FluroRouter>()));
+        title: Strings.login,
+        authBloc: getIt.get<AuthBloc>(),
+      ));
 
   //FeedPage
   getIt.registerFactory<FeedBloc>(

@@ -1,7 +1,7 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pictures_space/resourses/strings.dart';
+import 'package:pictures_space/ui/app/state/app_block.dart';
 import 'package:pictures_space/ui/widgets/edit_text.dart';
 
 import '../navigation/routes.dart';
@@ -10,15 +10,10 @@ import 'auth_events.dart';
 import 'auth_state.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage(
-      {Key? key,
-      required this.title,
-      required this.authBloc,
-      required this.router})
+  const AuthPage({Key? key, required this.title, required this.authBloc})
       : super(key: key);
   final String title;
   final AuthBloc authBloc;
-  final FluroRouter router;
 
   @override
   State<StatefulWidget> createState() => AuthPageState();
@@ -64,10 +59,11 @@ class AuthPageState extends State<AuthPage> {
           child: BlocBuilder<AuthBloc, AuthState>(
               bloc: widget.authBloc,
               builder: (context, state) {
+                final router = BlocProvider.of<AppBloc>(context).state.router;
                 if (state is LoadingState) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is SuccessState) {
-                  Future.microtask(() => widget.router.navigateTo(
+                  Future.microtask(() => router.navigateTo(
                         context,
                         Routes.feed,
                         clearStack: true,
@@ -128,7 +124,7 @@ class AuthPageState extends State<AuthPage> {
                         )
                       ]);
                 } else if (state is RegistrationState) {
-                  Future.microtask(() => widget.router.navigateTo(
+                  Future.microtask(() => router.navigateTo(
                         context,
                         Routes.registration,
                       ));
